@@ -10,7 +10,7 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
     _$ProductModelImpl(
       productName: json['productName'] as String,
       description: json['description'] as String,
-      price: json['price'] as String,
+      price: (json['price'] as num).toDouble(),
       stock: (json['stock'] as num).toInt(),
       isAvailable: json['isAvailable'] as bool,
     );

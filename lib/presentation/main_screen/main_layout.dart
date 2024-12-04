@@ -10,8 +10,9 @@ class MainLayout extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final products = ref.watch(productControllerProvider.future);
+    final productsAsync = ref.watch(productControllerProvider);
     final tabController = useTabController(initialLength: 2);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(context.s.product_screen),
@@ -26,8 +27,14 @@ class MainLayout extends ConsumerWidget {
       body: TabBarView(
         controller: tabController,
         children: [
-          ProductsPage(
-            products: products,
+          // TODO(George): path to presenter
+          productsAsync.when(
+            data: (products) =>
+                ProductsPage(
+                  products: products,
+                ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (err, stack) => Center(child: Text('Error: $err')),
           ),
           Center(
             child: Text(

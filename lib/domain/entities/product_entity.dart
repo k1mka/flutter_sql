@@ -9,7 +9,7 @@ class ProductEntity with _$ProductEntity {
   const factory ProductEntity({
     required String productName,
     required String description,
-    required String price,
+    required double price,
     required int stock,
     required bool isAvailable,
   }) = _ProductEntity;

@@ -22,7 +22,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   String get productName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   int get stock => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $ProductModelCopyWith<$Res> {
   $Res call(
       {String productName,
       String description,
-      String price,
+      double price,
       int stock,
       bool isAvailable});
 }
@@ -83,7 +83,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       stock: null == stock
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   $Res call(
       {String productName,
       String description,
-      String price,
+      double price,
       int stock,
       bool isAvailable});
 }
@@ -143,7 +143,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       stock: null == stock
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ class _$ProductModelImpl implements _ProductModel {
   @override
   final String description;
   @override
-  final String price;
+  final double price;
   @override
   final int stock;
   @override
@@ -225,7 +225,7 @@ abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
       {required final String productName,
       required final String description,
-      required final String price,
+      required final double price,
       required final int stock,
       required final bool isAvailable}) = _$ProductModelImpl;
 
@@ -237,7 +237,7 @@ abstract class _ProductModel implements ProductModel {
   @override
   String get description;
   @override
-  String get price;
+  double get price;
   @override
   int get stock;
   @override

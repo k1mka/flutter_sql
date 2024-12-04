@@ -10,7 +10,7 @@ class ProductModel with _$ProductModel {
   const factory ProductModel({
     required String productName,
     required String description,
-    required String price,
+    required double price,
     required int stock,
     required bool isAvailable,
   }) = _ProductModel;

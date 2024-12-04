@@ -22,7 +22,7 @@ ProductEntity _$ProductEntityFromJson(Map<String, dynamic> json) {
 mixin _$ProductEntity {
   String get productName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   int get stock => throw _privateConstructorUsedError;
   bool get isAvailable => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $ProductEntityCopyWith<$Res> {
   $Res call(
       {String productName,
       String description,
-      String price,
+      double price,
       int stock,
       bool isAvailable});
 }
@@ -83,7 +83,7 @@ class _$ProductEntityCopyWithImpl<$Res, $Val extends ProductEntity>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       stock: null == stock
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$ProductEntityImplCopyWith<$Res>
   $Res call(
       {String productName,
       String description,
-      String price,
+      double price,
       int stock,
       bool isAvailable});
 }
@@ -143,7 +143,7 @@ class __$$ProductEntityImplCopyWithImpl<$Res>
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
+              as double,
       stock: null == stock
           ? _value.stock
           : stock // ignore: cast_nullable_to_non_nullable
@@ -174,7 +174,7 @@ class _$ProductEntityImpl implements _ProductEntity {
   @override
   final String description;
   @override
-  final String price;
+  final double price;
   @override
   final int stock;
   @override
@@ -225,7 +225,7 @@ abstract class _ProductEntity implements ProductEntity {
   const factory _ProductEntity(
       {required final String productName,
       required final String description,
-      required final String price,
+      required final double price,
       required final int stock,
       required final bool isAvailable}) = _$ProductEntityImpl;
 
@@ -237,7 +237,7 @@ abstract class _ProductEntity implements ProductEntity {
   @override
   String get description;
   @override
-  String get price;
+  double get price;
   @override
   int get stock;
   @override
