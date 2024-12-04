@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  static const _databaseName = "myDatabase.db";
+  static const _databaseName = "productDataBase.db";
   static const _databaseVersion = 1;
 
   static const table = 'products';
@@ -29,11 +29,13 @@ class DatabaseHelper {
         version: _databaseVersion,
         onCreate: (db, version) async {
           await db.execute('''
-            CREATE TABLE $table (
-              $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-              $columnName TEXT NOT NULL,
-              $columnAge INTEGER NOT NULL
-            )
+           CREATE TABLE $table (
+               "product_name"  TEXT,
+               "description"  TEXT,
+               "price"  REAL,
+               "stock"  INTEGER,
+               "is_available"  INTEGER
+           );
           ''');
         },
       );

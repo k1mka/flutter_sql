@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_modal_controller.g.dart';
 
-// TODO(George): rename controller
+// TODO(George): rename controller and fix val deleting
 
 @riverpod
 class ProductModalController extends _$ProductModalController {

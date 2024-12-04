@@ -15,6 +15,7 @@ class ProductsPage extends ConsumerWidget {
   final VoidCallback onCreateProduct;
   final List<ProductEntity> products;
 
+  static const _buttonIcon = Icon(Icons.add);
   static const _borderRadius = RoundedRectangleBorder(borderRadius: Radiuses.borderRadius12);
 
   @override
@@ -25,6 +26,7 @@ class ProductsPage extends ConsumerWidget {
         Padding(
           padding: Spacings.padding16,
           child: FloatingActionButton(
+            child: _buttonIcon,
             onPressed: () => showModalBottomSheet(
               context: context,
               shape: _borderRadius,

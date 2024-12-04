@@ -29,19 +29,17 @@ class MainLayout extends HookConsumerWidget {
         children: [
           // TODO(George): path to presenter
           productsAsync.when(
-            data: (products) => ProductsPage(
-              products: products,
-              onCreateProduct: () {
-                //
-              },
+            data: (product) => ProductsPage(
+              products: product,
+              onCreateProduct: ref.read(productControllerProvider.notifier).addNewProduct,
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Center(child: Text('Error: $err')),
           ),
-          const Center(
+          Center(
             child: Text(
-              'Content of Second Tab',
-              style: TextStyle(fontSize: 24),
+              context.s.content_of_second_tab,
+              style: const TextStyle(fontSize: 24),
             ),
           ),
         ],
