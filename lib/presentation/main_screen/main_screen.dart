@@ -7,7 +7,5 @@ class MainScreen extends StatelessWidget {
   static const routeName = 'main_screen';
 
   @override
-  Widget build(BuildContext context) {
-    return const MainLayout();
-  }
+  Widget build(BuildContext context) => const MainLayout();
 }

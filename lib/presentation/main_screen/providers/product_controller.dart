@@ -12,4 +12,8 @@ class ProductController extends _$ProductController {
     final products = await repository.getAllProducts();
     return products;
   }
+
+  Future<void> addNewProduct(ProductEntity product) async {
+    await repository.saveProduct(product);
+  }
 }

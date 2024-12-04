@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_sql/context_extensions.dart';
-import 'package:flutter_sql/presentation/main_screen/prodivers/product_controller.dart';
+import 'package:flutter_sql/presentation/main_screen/providers/product_controller.dart';
 import 'package:flutter_sql/presentation/widgets/pages/products_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MainLayout extends ConsumerWidget {
+class MainLayout extends HookConsumerWidget {
   const MainLayout({super.key});
 
   @override
@@ -29,14 +29,16 @@ class MainLayout extends ConsumerWidget {
         children: [
           // TODO(George): path to presenter
           productsAsync.when(
-            data: (products) =>
-                ProductsPage(
-                  products: products,
-                ),
+            data: (products) => ProductsPage(
+              products: products,
+              onCreateProduct: () {
+                //
+              },
+            ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Center(child: Text('Error: $err')),
           ),
-          Center(
+          const Center(
             child: Text(
               'Content of Second Tab',
               style: TextStyle(fontSize: 24),

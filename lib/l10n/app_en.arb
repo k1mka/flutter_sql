@@ -1,5 +1,12 @@
 {
   "add_products": "All Products",
   "saved_products": "Saved Products",
-  "product_screen": "Product screen"
+  "product_screen": "Product screen",
+  "add_product" : "Add Product",
+  "product_name" : "Product Name",
+  "description" : "Description",
+  "price" : "Price",
+  "stock" : "Stock",
+  "is_available" : "is available?",
+  "content_of_second_tab" : "Content of Second Tab"
 }

@@ -14,5 +14,16 @@ class ProductEntity with _$ProductEntity {
     required bool isAvailable,
   }) = _ProductEntity;
 
+  static ProductEntity mock() {
+    return const ProductEntity(
+      productName: '',
+      description: '',
+      price: 0.0,
+      stock: -1,
+      isAvailable: false,
+    );
+  }
+
   factory ProductEntity.fromJson(Map<String, dynamic> json) => _$ProductEntityFromJson(json);
 }
+

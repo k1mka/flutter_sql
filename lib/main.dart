@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sql/presentation/main_screen/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_sql/service_locator.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final providerContainer = ProviderContainer();
 
 void main() {
-  runApp(const MyApp());
+  serviceLocator();
+  runApp(
+    UncontrolledProviderScope(
+      container: providerContainer,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
