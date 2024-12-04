@@ -24,7 +24,7 @@ mixin _$ProductModel {
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   int get stock => throw _privateConstructorUsedError;
-  bool get isAvailable => throw _privateConstructorUsedError;
+  int get isAvailable => throw _privateConstructorUsedError;
 
   /// Serializes this ProductModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $ProductModelCopyWith<$Res> {
       String description,
       double price,
       int stock,
-      bool isAvailable});
+      int isAvailable});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       isAvailable: null == isAvailable
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ) as $Val);
   }
 }
@@ -109,7 +109,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       String description,
       double price,
       int stock,
-      bool isAvailable});
+      int isAvailable});
 }
 
 /// @nodoc
@@ -151,7 +151,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
       isAvailable: null == isAvailable
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ));
   }
 }
@@ -178,7 +178,7 @@ class _$ProductModelImpl implements _ProductModel {
   @override
   final int stock;
   @override
-  final bool isAvailable;
+  final int isAvailable;
 
   @override
   String toString() {
@@ -227,7 +227,7 @@ abstract class _ProductModel implements ProductModel {
       required final String description,
       required final double price,
       required final int stock,
-      required final bool isAvailable}) = _$ProductModelImpl;
+      required final int isAvailable}) = _$ProductModelImpl;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$ProductModelImpl.fromJson;
@@ -241,7 +241,7 @@ abstract class _ProductModel implements ProductModel {
   @override
   int get stock;
   @override
-  bool get isAvailable;
+  int get isAvailable;
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.

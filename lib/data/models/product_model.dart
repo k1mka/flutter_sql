@@ -12,7 +12,7 @@ class ProductModel with _$ProductModel {
     required String description,
     required double price,
     required int stock,
-    required bool isAvailable,
+    required int isAvailable,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
@@ -23,17 +23,17 @@ class ProductModel with _$ProductModel {
       description: entity.description,
       price: entity.price,
       stock: entity.stock,
-      isAvailable: entity.isAvailable,
+      isAvailable: entity.isAvailable ? 1 : 0,
     );
   }
 }
 
 extension ProductModelExt on ProductModel {
   ProductEntity toEntity() => ProductEntity(
-        productName: productName,
-        description: description,
-        price: price,
-        stock: stock,
-        isAvailable: isAvailable,
-      );
+    productName: productName,
+    description: description,
+    price: price,
+    stock: stock,
+    isAvailable: isAvailable == 1 ? true : false,
+  );
 }
