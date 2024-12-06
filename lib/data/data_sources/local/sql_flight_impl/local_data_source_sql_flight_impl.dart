@@ -13,6 +13,7 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
     await dbHelper.insert(productData);
   }
 
+  /// generate a unique id before inserting
   int _generateRandomId() {
     final randomId = Random().nextInt(10000);
     return randomId;
