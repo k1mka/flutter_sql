@@ -16,7 +16,7 @@ class ProductController extends _$ProductController {
 
   Future<void> addNewProduct() async {
     final currentProduct = ref.read(productModalControllerProvider);
-    print('testGov! ---- $currentProduct');
     await repository.saveProduct(currentProduct);
+    ref.invalidateSelf();
   }
 }

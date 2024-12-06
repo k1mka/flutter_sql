@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sql/domain/entities/product_entity.dart';
 import 'package:flutter_sql/presentation/widgets/atoms/product_modal_content.dart';
+import 'package:flutter_sql/presentation/widgets/atoms/product_widget.dart';
 import 'package:flutter_sql/presentation/widgets/tokens/radiuses.dart';
 import 'package:flutter_sql/presentation/widgets/tokens/spacings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,6 +24,21 @@ class ProductsPage extends ConsumerWidget {
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
+        Padding(
+          padding: Spacings.padding16,
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Center(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: Spacings.padding4,
+                  child: ProductWidget(product: products[index]),
+                ),
+              ),
+            ),
+          ),
+        ),
         Padding(
           padding: Spacings.padding16,
           child: FloatingActionButton(

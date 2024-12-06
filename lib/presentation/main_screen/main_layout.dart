@@ -8,6 +8,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class MainLayout extends HookConsumerWidget {
   const MainLayout({super.key});
 
+  void createProduct(WidgetRef ref, BuildContext context) async {
+    await ref.read(productControllerProvider.notifier).addNewProduct();
+    if (context.mounted) Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsync = ref.watch(productControllerProvider);
@@ -31,7 +36,7 @@ class MainLayout extends HookConsumerWidget {
           productsAsync.when(
             data: (product) => ProductsPage(
               products: product,
-              onCreateProduct: ref.read(productControllerProvider.notifier).addNewProduct,
+              onCreateProduct: () => createProduct(ref, context),
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Center(child: Text('Error: $err')),
