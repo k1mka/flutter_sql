@@ -7,6 +7,13 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
   final dbHelper = DatabaseHelper.instance;
 
   @override
+  Future<List<ProductModel>> getAllProducts() async {
+    final products = await dbHelper.queryAllRows();
+    final result = products.map((product) => ProductModel.fromJson(product)).toList();
+    return result;
+  }
+
+  @override
   Future<void> saveProduct(ProductModel product) async {
     final productData = product.toJson();
     productData[DatabaseHelper.columnId] = _generateRandomId();
@@ -20,14 +27,5 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getAllProducts() async {
-    final products = await dbHelper.queryAllRows();
-    final result = products.map((product) => ProductModel.fromJson(product)).toList();
-    return result;
-  }
-
-  @override
-  Future<void> deleteProduct(ProductModel product) async {
-    await dbHelper.delete(product.id);
-  }
+  Future<void> deleteProduct(ProductModel product) async => await dbHelper.delete(product.id);
 }
