@@ -4,11 +4,11 @@ import 'package:flutter_sql/data/data_sources/local/sql_flight_impl/data_base_he
 import 'package:flutter_sql/data/models/product_model.dart';
 
 class LocalDataSourceSqlFlightImpl implements LocalDataSource {
-  final dbHelper = DatabaseHelper.instance;
+  final _dbHelper = DatabaseHelper.instance;
 
   @override
   Future<List<ProductModel>> getAllProducts() async {
-    final products = await dbHelper.queryAllRows();
+    final products = await _dbHelper.queryAllRows();
     final result = products.map((product) => ProductModel.fromJson(product)).toList();
     return result;
   }
@@ -17,7 +17,7 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
   Future<void> saveProduct(ProductModel product) async {
     final productData = product.toJson();
     productData[DatabaseHelper.columnId] = _generateRandomId();
-    await dbHelper.insert(productData);
+    await _dbHelper.insert(productData);
   }
 
   /// generate a unique id before inserting
@@ -27,5 +27,5 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
   }
 
   @override
-  Future<void> deleteProduct(ProductModel product) async => await dbHelper.delete(product.id);
+  Future<void> deleteProduct(ProductModel product) async => await _dbHelper.delete(product.id);
 }
