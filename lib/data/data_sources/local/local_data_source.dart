@@ -4,4 +4,6 @@ abstract interface class LocalDataSource {
   Future<void> saveProduct(ProductModel product);
 
   Future<List<ProductModel>> getAllProducts();
+
+  Future<void> deleteProduct(ProductModel product);
 }

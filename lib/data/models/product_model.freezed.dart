@@ -20,6 +20,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
+  int get id => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
@@ -43,7 +44,8 @@ abstract class $ProductModelCopyWith<$Res> {
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call(
-      {String productName,
+      {int id,
+      String productName,
       String description,
       double price,
       int stock,
@@ -65,6 +67,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? productName = null,
     Object? description = null,
     Object? price = null,
@@ -72,6 +75,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? isAvailable = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -105,7 +112,8 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String productName,
+      {int id,
+      String productName,
       String description,
       double price,
       int stock,
@@ -125,6 +133,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? productName = null,
     Object? description = null,
     Object? price = null,
@@ -132,6 +141,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? isAvailable = null,
   }) {
     return _then(_$ProductModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -160,7 +173,8 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductModelImpl implements _ProductModel {
   const _$ProductModelImpl(
-      {required this.productName,
+      {required this.id,
+      required this.productName,
       required this.description,
       required this.price,
       required this.stock,
@@ -169,6 +183,8 @@ class _$ProductModelImpl implements _ProductModel {
   factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String productName;
   @override
@@ -182,7 +198,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(productName: $productName, description: $description, price: $price, stock: $stock, isAvailable: $isAvailable)';
+    return 'ProductModel(id: $id, productName: $productName, description: $description, price: $price, stock: $stock, isAvailable: $isAvailable)';
   }
 
   @override
@@ -190,6 +206,7 @@ class _$ProductModelImpl implements _ProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.productName, productName) ||
                 other.productName == productName) &&
             (identical(other.description, description) ||
@@ -203,7 +220,7 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, productName, description, price, stock, isAvailable);
+      runtimeType, id, productName, description, price, stock, isAvailable);
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
@@ -223,7 +240,8 @@ class _$ProductModelImpl implements _ProductModel {
 
 abstract class _ProductModel implements ProductModel {
   const factory _ProductModel(
-      {required final String productName,
+      {required final int id,
+      required final String productName,
       required final String description,
       required final double price,
       required final int stock,
@@ -232,6 +250,8 @@ abstract class _ProductModel implements ProductModel {
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$ProductModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get productName;
   @override

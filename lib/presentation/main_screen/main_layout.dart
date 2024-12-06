@@ -36,6 +36,10 @@ class MainLayout extends HookConsumerWidget {
           productsAsync.when(
             data: (product) => ProductsPage(
               products: product,
+              onDeleteProduct: (id) => ref.read(productControllerProvider.notifier).deleteProduct(id),
+              onEditProduct: () {
+                // TODO(George): add update later
+              },
               onCreateProduct: () => createProduct(ref, context),
             ),
             loading: () => const Center(child: CircularProgressIndicator()),

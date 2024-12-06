@@ -8,6 +8,7 @@ part 'product_model.g.dart';
 @freezed
 class ProductModel with _$ProductModel {
   const factory ProductModel({
+    required int id,
     required String productName,
     required String description,
     required double price,
@@ -24,16 +25,18 @@ class ProductModel with _$ProductModel {
       price: entity.price,
       stock: entity.stock,
       isAvailable: entity.isAvailable ? 1 : 0,
+      id: entity.id,
     );
   }
 }
 
 extension ProductModelExt on ProductModel {
   ProductEntity toEntity() => ProductEntity(
-    productName: productName,
-    description: description,
-    price: price,
-    stock: stock,
-    isAvailable: isAvailable == 1 ? true : false,
-  );
+        productName: productName,
+        description: description,
+        price: price,
+        stock: stock,
+        isAvailable: isAvailable == 1 ? true : false,
+        id: id,
+      );
 }

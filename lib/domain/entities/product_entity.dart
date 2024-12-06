@@ -7,6 +7,7 @@ part 'product_entity.g.dart';
 @freezed
 class ProductEntity with _$ProductEntity {
   const factory ProductEntity({
+    required int id,
     required String productName,
     required String description,
     required double price,
@@ -21,9 +22,9 @@ class ProductEntity with _$ProductEntity {
       price: 0.0,
       stock: -1,
       isAvailable: false,
+      id: 0,
     );
   }
 
   factory ProductEntity.fromJson(Map<String, dynamic> json) => _$ProductEntityFromJson(json);
 }
-
