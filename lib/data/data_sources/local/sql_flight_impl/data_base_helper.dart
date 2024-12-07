@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  static const _databaseName = "TestBD4.db";
+  static const _databaseName = "ProductsLight.db";
   static const _databaseVersion = 1;
 
   static const table = 'products';
