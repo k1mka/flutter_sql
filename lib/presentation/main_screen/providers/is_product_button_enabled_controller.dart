@@ -7,10 +7,10 @@ part 'is_product_button_enabled_controller.g.dart';
 bool isProductButtonEnabled(IsProductButtonEnabledRef ref) {
   final currentProduct = ref.watch(productModalControllerProvider);
 
-  final result = currentProduct?.productName != null &&
-      currentProduct?.description != null &&
-      currentProduct?.stock != null &&
-      currentProduct?.price != null;
+  final result = currentProduct.productName.isNotEmpty &&
+      currentProduct.description.isNotEmpty &&
+      currentProduct.stock != -1 &&
+      currentProduct.price != 0;
 
   return result;
 }

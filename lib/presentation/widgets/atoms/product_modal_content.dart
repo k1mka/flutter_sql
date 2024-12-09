@@ -47,12 +47,15 @@ class _ProductModalContentState extends ConsumerState<ProductModalContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    initProduct();
+  }
+
+  void initProduct() {
     final bool isInit = widget.isEditMode && widget.currentProduct != null;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         if (isInit) {
-          ref
-              .read(productModalControllerProvider.notifier)
+          ref.read(productModalControllerProvider.notifier)
               .initCurrentProduct(widget.currentProduct);
         }
       },
@@ -114,7 +117,9 @@ class _ProductModalContentState extends ConsumerState<ProductModalContent> {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                 onPressed: isAddProductButtonEnabled ? widget.onCreateOrEdit : null,
-                child: Text(context.s.add_product),
+                child: Text(
+                  widget.isEditMode ? context.s.edit_product : context.s.add_product,
+                ),
               ),
             ),
           ],
