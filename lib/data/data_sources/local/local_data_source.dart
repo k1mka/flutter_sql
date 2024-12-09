@@ -6,4 +6,6 @@ abstract interface class LocalDataSource {
   Future<void> saveProduct(ProductModel product);
 
   Future<void> deleteProduct(ProductModel product);
+
+  Future<void> updateProduct(ProductModel product);
 }

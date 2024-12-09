@@ -13,7 +13,7 @@ class AllProductsWidget extends StatelessWidget {
 
   final List<ProductEntity> products;
 
-  final VoidCallback onEditProduct;
+  final ValueChanged<ProductEntity> onEditProduct;
   final ValueChanged<ProductEntity> onDeleteProduct;
 
   @override
@@ -23,14 +23,17 @@ class AllProductsWidget extends StatelessWidget {
       child: Center(
         child: ListView.builder(
           itemCount: products.length,
-          itemBuilder: (_, int index) => Padding(
-            padding: Spacings.padding4,
-            child: ProductWidget(
-              product: products[index],
-              onEdit: onEditProduct,
-              onDelete: () => onDeleteProduct(products[index]),
-            ),
-          ),
+          itemBuilder: (_, int index) {
+            final currentProduct = products[index];
+            return Padding(
+              padding: Spacings.padding4,
+              child: ProductWidget(
+                product: currentProduct,
+                onEdit: () => onEditProduct(currentProduct),
+                onDelete: () => onDeleteProduct(currentProduct),
+              ),
+            );
+          },
         ),
       ),
     );

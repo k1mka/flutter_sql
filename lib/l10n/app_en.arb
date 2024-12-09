@@ -8,5 +8,6 @@
   "price" : "Price",
   "stock" : "Stock",
   "is_available" : "is available?",
-  "content_of_second_tab" : "Content of Second Tab"
+  "content_of_second_tab" : "Content of Second Tab",
+  "edit_product" : "Edit product"
 }

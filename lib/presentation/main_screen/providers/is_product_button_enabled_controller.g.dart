@@ -7,7 +7,7 @@ part of 'is_product_button_enabled_controller.dart';
 // **************************************************************************
 
 String _$isProductButtonEnabledHash() =>
-    r'fa040cd0a1a47acb7638fe34acd6f62a6923e925';
+    r'97e6210a84f7d841afd4b7d86fb61bd3fbb0b331';
 
 /// See also [isProductButtonEnabled].
 @ProviderFor(isProductButtonEnabled)

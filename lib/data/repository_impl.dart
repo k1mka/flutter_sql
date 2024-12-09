@@ -25,4 +25,10 @@ class RepositoryImpl implements Repository {
     final model = ProductModel.fromEntity(product);
     await localDataSource.deleteProduct(model);
   }
+
+  @override
+  Future<void> updateProduct(ProductEntity product) async {
+    final model = ProductModel.fromEntity(product);
+    await localDataSource.updateProduct(model);
+  }
 }

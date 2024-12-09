@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CustomSwitchButton extends StatelessWidget {
+class CustomSwitchButton extends HookWidget {
   const CustomSwitchButton({
     super.key,
     required this.onChanged,
@@ -14,13 +15,17 @@ class CustomSwitchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localState = useState(isSelected);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(text),
         Switch(
-          value: isSelected,
-          onChanged: onChanged,
+          value: localState.value,
+          onChanged: (value) {
+            localState.value = value;
+            onChanged(value);
+          },
         ),
       ],
     );

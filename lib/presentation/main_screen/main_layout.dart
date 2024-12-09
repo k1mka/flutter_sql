@@ -13,6 +13,14 @@ class MainLayout extends HookConsumerWidget {
     if (context.mounted) Navigator.of(context).pop();
   }
 
+  void updateProduct(
+    WidgetRef ref,
+    BuildContext context,
+  ) async {
+    ref.read(productControllerProvider.notifier).updateProduct();
+    if (context.mounted) Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final productsAsync = ref.watch(productControllerProvider);
@@ -36,11 +44,10 @@ class MainLayout extends HookConsumerWidget {
           productsAsync.when(
             data: (product) => ProductsPage(
               products: product,
-              onDeleteProduct: (id) => ref.read(productControllerProvider.notifier).deleteProduct(id),
-              onEditProduct: () {
-                // TODO(George): add update later
-              },
+              onDeleteProduct: (id) =>
+                  ref.read(productControllerProvider.notifier).deleteProduct(id),
               onCreateProduct: () => createProduct(ref, context),
+              onEditProduct: () => updateProduct(ref, context),
             ),
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (err, stack) => Center(child: Text('Error: $err')),

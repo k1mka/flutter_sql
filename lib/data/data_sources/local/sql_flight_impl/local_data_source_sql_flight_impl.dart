@@ -28,4 +28,12 @@ class LocalDataSourceSqlFlightImpl implements LocalDataSource {
 
   @override
   Future<void> deleteProduct(ProductModel product) async => await _dbHelper.delete(product.id);
+
+  @override
+  Future<void> updateProduct(ProductModel product) async {
+    await _dbHelper.update(
+      product.id,
+      product.toJson(),
+    );
+  }
 }

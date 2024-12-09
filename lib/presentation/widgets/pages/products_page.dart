@@ -8,21 +8,36 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProductsPage extends ConsumerWidget {
   const ProductsPage({
+    super.key,
     required this.onCreateProduct,
     required this.onDeleteProduct,
     required this.onEditProduct,
     required this.products,
-    super.key,
   });
 
-  final VoidCallback onCreateProduct;
   final List<ProductEntity> products;
 
+  final VoidCallback onCreateProduct;
   final ValueChanged<ProductEntity> onDeleteProduct;
   final VoidCallback onEditProduct;
 
+  static const _isScrollControlled = true;
   static const _buttonIcon = Icon(Icons.add);
   static const _borderRadius = RoundedRectangleBorder(borderRadius: Radiuses.borderRadius12);
+
+  void editProduct({
+    required BuildContext context,
+    required ProductEntity product,
+  }) =>
+      showModalBottomSheet(
+        context: context,
+        shape: _borderRadius,
+        isScrollControlled: _isScrollControlled,
+        builder: (_) => ProductModalContent.edit(
+          product,
+          onEditProduct,
+        ),
+      );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Stack(
@@ -31,7 +46,7 @@ class ProductsPage extends ConsumerWidget {
           AllProductsWidget(
             products: products,
             onDeleteProduct: (product) => onDeleteProduct(product),
-            onEditProduct: onEditProduct,
+            onEditProduct: (product) => editProduct(context: context, product: product),
           ),
           Padding(
             padding: Spacings.padding16,
@@ -40,10 +55,8 @@ class ProductsPage extends ConsumerWidget {
               onPressed: () => showModalBottomSheet(
                 context: context,
                 shape: _borderRadius,
-                isScrollControlled: true,
-                builder: (_) => ProductModalContent(
-                  onCreateProduct: onCreateProduct,
-                ),
+                isScrollControlled: _isScrollControlled,
+                builder: (_) => ProductModalContent.create(onCreateProduct),
               ),
             ),
           ),

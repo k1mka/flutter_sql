@@ -14,6 +14,12 @@ class ProductController extends _$ProductController {
     return products;
   }
 
+  Future<void> updateProduct() async {
+    final currentProduct = ref.read(productModalControllerProvider);
+    await repository.updateProduct(currentProduct!);
+    ref.invalidateSelf();
+  }
+
   Future<void> deleteProduct(ProductEntity product) async {
     await repository.deleteProduct(product);
     ref.invalidateSelf();
@@ -21,7 +27,7 @@ class ProductController extends _$ProductController {
 
   Future<void> addNewProduct() async {
     final currentProduct = ref.read(productModalControllerProvider);
-    await repository.saveProduct(currentProduct);
+    await repository.saveProduct(currentProduct!);
     ref.invalidateSelf();
   }
 }

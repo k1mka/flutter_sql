@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sql/context_extensions.dart';
+import 'package:flutter_sql/domain/entities/product_entity.dart';
 import 'package:flutter_sql/presentation/main_screen/providers/is_product_button_enabled_controller.dart';
 import 'package:flutter_sql/presentation/main_screen/providers/product_modal_controller.dart';
 import 'package:flutter_sql/presentation/widgets/atoms/custom_text_form.dart';
@@ -7,20 +8,56 @@ import 'package:flutter_sql/presentation/widgets/custom_switch_button.dart';
 import 'package:flutter_sql/presentation/widgets/tokens/spacings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ProductModalContent extends ConsumerWidget {
-  const ProductModalContent({
-    required this.onCreateProduct,
-    super.key,
+class ProductModalContent extends ConsumerStatefulWidget {
+  final bool isEditMode;
+  final ProductEntity? currentProduct;
+  final VoidCallback onCreateOrEdit;
+
+  const ProductModalContent._({
+    this.currentProduct,
+    required this.onCreateOrEdit,
+    required this.isEditMode,
   });
 
   static const _spacer = Spacings.spacer16;
 
-  final VoidCallback onCreateProduct;
+  factory ProductModalContent.create(VoidCallback onPressed) {
+    return ProductModalContent._(
+      isEditMode: false,
+      onCreateOrEdit: onPressed,
+    );
+  }
+
+  factory ProductModalContent.edit(
+    ProductEntity currentProduct,
+    VoidCallback onPressed,
+  ) {
+    return ProductModalContent._(
+      isEditMode: true,
+      onCreateOrEdit: onPressed,
+      currentProduct: currentProduct,
+    );
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isAvailable = ref.watch(productModalControllerProvider).isAvailable;
+  ConsumerState<ProductModalContent> createState() => _ProductModalContentState();
+}
+
+class _ProductModalContentState extends ConsumerState<ProductModalContent> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => ref
+          .read(productModalControllerProvider.notifier)
+          .initCurrentProduct(widget.currentProduct),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final isAddProductButtonEnabled = ref.watch(isProductButtonEnabledProvider);
+
     return Padding(
       padding: Spacings.padding16,
       child: SingleChildScrollView(
@@ -29,45 +66,59 @@ class ProductModalContent extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.s.add_product,
+              widget.isEditMode ? context.s.edit_product : context.s.add_product,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            _spacer,
+            ProductModalContent._spacer,
             CustomTextForm(
+              initValue: widget.currentProduct?.productName,
               labelText: context.s.product_name,
-              onChanged: ref.read(productModalControllerProvider.notifier).updateProductName,
+              onChanged: (value) {
+                ref.read(productModalControllerProvider.notifier).updateProductName(value);
+              },
             ),
-            _spacer,
+            ProductModalContent._spacer,
             CustomTextForm(
+              initValue: widget.currentProduct?.description,
               labelText: context.s.description,
-              onChanged: ref.read(productModalControllerProvider.notifier).updateProductDescription,
+              onChanged: (value) {
+                ref.read(productModalControllerProvider.notifier).updateProductDescription(value);
+              },
             ),
-            _spacer,
+            ProductModalContent._spacer,
             CustomTextForm(
+              initValue: widget.currentProduct?.price.toString(),
               labelText: context.s.price,
               keyboardType: TextInputType.number,
-              onChanged: ref.read(productModalControllerProvider.notifier).updatePrice,
+              onChanged: (value) {
+                ref.read(productModalControllerProvider.notifier).updatePrice(value);
+              },
             ),
-            _spacer,
+            ProductModalContent._spacer,
             CustomTextForm(
+              initValue: widget.currentProduct?.stock.toString(),
               labelText: context.s.stock,
               keyboardType: TextInputType.number,
-              onChanged: ref.read(productModalControllerProvider.notifier).updateStock,
+              onChanged: (value) {
+                ref.read(productModalControllerProvider.notifier).updateStock(value);
+              },
             ),
-            _spacer,
+            ProductModalContent._spacer,
             CustomSwitchButton(
-              isSelected: isAvailable,
+              isSelected: widget.currentProduct?.isAvailable ?? false,
               text: context.s.is_available,
-              onChanged: ref.read(productModalControllerProvider.notifier).updateAvailable,
+              onChanged: (value) {
+                ref.read(productModalControllerProvider.notifier).updateAvailable(value);
+              },
             ),
-            _spacer,
+            ProductModalContent._spacer,
             Align(
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
-                onPressed: isAddProductButtonEnabled ? onCreateProduct : null,
+                onPressed: isAddProductButtonEnabled ? widget.onCreateOrEdit : null,
                 child: Text(context.s.add_product),
               ),
             ),
