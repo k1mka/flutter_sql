@@ -15,21 +15,21 @@ class ProductModalController extends _$ProductModalController {
   }
 
   void updateProductName(String name) {
-    state = state?.copyWith(productName: name);
+    state = state.copyWith(productName: name);
   }
 
   void updateProductDescription(String description) {
-    state = state?.copyWith(description: description);
+    state = state.copyWith(description: description);
   }
 
   void updateAvailable(bool isAvailable) {
-    state = state?.copyWith(isAvailable: isAvailable);
+    state = state.copyWith(isAvailable: isAvailable);
   }
 
   void updatePrice(String price) {
     if (_isNumeric(price)) {
       final parsedPrice = double.parse(price);
-      state = state?.copyWith(price: parsedPrice);
+      state = state.copyWith(price: parsedPrice);
     } else {
       debugPrint("Invalid input: $price");
     }
@@ -38,7 +38,7 @@ class ProductModalController extends _$ProductModalController {
   void updateStock(String stock) {
     if (_isNumeric(stock)) {
       final parsedStock = int.tryParse(stock) ?? 0;
-      state = state?.copyWith(stock: parsedStock);
+      state = state.copyWith(stock: parsedStock);
     } else {
       debugPrint("Invalid input: $stock");
     }

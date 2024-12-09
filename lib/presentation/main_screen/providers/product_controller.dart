@@ -9,14 +9,13 @@ part 'product_controller.g.dart';
 class ProductController extends _$ProductController {
   @override
   Future<List<ProductEntity>> build() async {
-    // TODO(George): add store later
     final products = await repository.getAllProducts();
     return products;
   }
 
   Future<void> updateProduct() async {
     final currentProduct = ref.read(productModalControllerProvider);
-    await repository.updateProduct(currentProduct!);
+    await repository.updateProduct(currentProduct);
     ref.invalidateSelf();
   }
 
@@ -27,7 +26,7 @@ class ProductController extends _$ProductController {
 
   Future<void> addNewProduct() async {
     final currentProduct = ref.read(productModalControllerProvider);
-    await repository.saveProduct(currentProduct!);
+    await repository.saveProduct(currentProduct);
     ref.invalidateSelf();
   }
 }
