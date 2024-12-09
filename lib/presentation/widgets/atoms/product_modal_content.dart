@@ -47,10 +47,15 @@ class _ProductModalContentState extends ConsumerState<ProductModalContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final bool isInit = widget.isEditMode && widget.currentProduct != null;
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => ref
-          .read(productModalControllerProvider.notifier)
-          .initCurrentProduct(widget.currentProduct),
+      (_) {
+        if (isInit) {
+          ref
+              .read(productModalControllerProvider.notifier)
+              .initCurrentProduct(widget.currentProduct);
+        }
+      },
     );
   }
 
@@ -76,43 +81,33 @@ class _ProductModalContentState extends ConsumerState<ProductModalContent> {
             CustomTextForm(
               initValue: widget.currentProduct?.productName,
               labelText: context.s.product_name,
-              onChanged: (value) {
-                ref.read(productModalControllerProvider.notifier).updateProductName(value);
-              },
+              onChanged: ref.read(productModalControllerProvider.notifier).updateProductName,
             ),
             ProductModalContent._spacer,
             CustomTextForm(
               initValue: widget.currentProduct?.description,
               labelText: context.s.description,
-              onChanged: (value) {
-                ref.read(productModalControllerProvider.notifier).updateProductDescription(value);
-              },
+              onChanged: ref.read(productModalControllerProvider.notifier).updateProductDescription,
             ),
             ProductModalContent._spacer,
             CustomTextForm(
               initValue: widget.currentProduct?.price.toString(),
               labelText: context.s.price,
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                ref.read(productModalControllerProvider.notifier).updatePrice(value);
-              },
+              onChanged: ref.read(productModalControllerProvider.notifier).updatePrice,
             ),
             ProductModalContent._spacer,
             CustomTextForm(
               initValue: widget.currentProduct?.stock.toString(),
               labelText: context.s.stock,
               keyboardType: TextInputType.number,
-              onChanged: (value) {
-                ref.read(productModalControllerProvider.notifier).updateStock(value);
-              },
+              onChanged: ref.read(productModalControllerProvider.notifier).updateStock,
             ),
             ProductModalContent._spacer,
             CustomSwitchButton(
               isSelected: widget.currentProduct?.isAvailable ?? false,
               text: context.s.is_available,
-              onChanged: (value) {
-                ref.read(productModalControllerProvider.notifier).updateAvailable(value);
-              },
+              onChanged: ref.read(productModalControllerProvider.notifier).updateAvailable,
             ),
             ProductModalContent._spacer,
             Align(
